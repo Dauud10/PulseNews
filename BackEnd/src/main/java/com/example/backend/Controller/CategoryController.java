@@ -3,7 +3,6 @@ package com.example.backend.Controller;
 import com.example.backend.DTO.CategoryDTO;
 import com.example.backend.Model.Category;
 import com.example.backend.Service.CategoryService;
-import com.example.backend.Mapper.CategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:5173") // Allow Vue frontend
 @RestController
@@ -22,13 +22,24 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @Autowired
-    private CategoryMapper categoryMapper;
+    // Convert Category to CategoryDTO
+    private CategoryDTO convertToDTO(Category category) {
+        return new CategoryDTO(category.getId(), category.getName());
+    }
+
+    // Convert CategoryDTO to Category
+    private Category convertToEntity(CategoryDTO categoryDTO) {
+        Category category = new Category();
+        category.setName(categoryDTO.getName());
+        return category;
+    }
 
     @GetMapping
     public ResponseEntity<List<CategoryDTO>> getAllCategories() {
         List<Category> categories = categoryService.getAllCategories();
-        List<CategoryDTO> categoryDTOs = categoryMapper.toDTOList(categories); // Convert to DTOs
+        List<CategoryDTO> categoryDTOs = categories.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
         return ResponseEntity.ok(categoryDTOs);
     }
 
@@ -38,15 +49,15 @@ public class CategoryController {
         if (category == null) {
             return ResponseEntity.notFound().build();
         }
-        CategoryDTO categoryDTO = categoryMapper.toDTO(category); // Convert to DTO
+        CategoryDTO categoryDTO = convertToDTO(category);
         return ResponseEntity.ok(categoryDTO);
     }
 
     @PostMapping
     public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
-        Category category = categoryMapper.toEntity(categoryDTO); // Convert DTO to entity
+        Category category = convertToEntity(categoryDTO);
         Category savedCategory = categoryService.addCategory(category);
-        CategoryDTO savedCategoryDTO = categoryMapper.toDTO(savedCategory); // Convert back to DTO
+        CategoryDTO savedCategoryDTO = convertToDTO(savedCategory);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCategoryDTO);
     }
 
@@ -57,9 +68,9 @@ public class CategoryController {
             return ResponseEntity.notFound().build();
         }
         categoryDTO.setId(id); // Ensure correct ID
-        Category category = categoryMapper.toEntity(categoryDTO); // Convert DTO to entity
+        Category category = convertToEntity(categoryDTO);
         Category savedCategory = categoryService.addCategory(category);
-        CategoryDTO savedCategoryDTO = categoryMapper.toDTO(savedCategory); // Convert back to DTO
+        CategoryDTO savedCategoryDTO = convertToDTO(savedCategory);
         return ResponseEntity.ok(savedCategoryDTO);
     }
 
@@ -72,4 +83,5 @@ public class CategoryController {
         return ResponseEntity.ok("Category deleted successfully!");
     }
 }
+
 
