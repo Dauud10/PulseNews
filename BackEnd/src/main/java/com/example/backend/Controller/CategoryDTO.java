@@ -18,4 +18,3 @@ public class CategoryDTO {
         this.name = name;
     }
 }
-
