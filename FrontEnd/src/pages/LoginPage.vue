@@ -1,7 +1,7 @@
 <template>
   <div class="login-page">
     <div class="login-container">
-      <img src="@/assets/pulsenews.png" alt="PulseNews Logo" class="logo" />
+      <img src="@/icons/pulsenews.png" alt="PulseNews Logo" class="logo" />
       <h1>LOG IN TO PULSE NEWS</h1>
       <form @submit.prevent="handleLogin">
         <label for="email">Enter your email:</label>
