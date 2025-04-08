@@ -82,8 +82,9 @@ export default {
   setup() {
     useRouter();
     const performSearch = () => {
-      if (this.searchQuery.trim() !== "") {
-      }
+      // if (this.searchQuery.trim() !== "") {
+      //   // Implement search logic
+      // }
     };
 
     return { performSearch };
