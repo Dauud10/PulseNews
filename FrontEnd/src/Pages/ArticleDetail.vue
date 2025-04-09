@@ -40,7 +40,7 @@ export default {
           id: 2,
           title: "ENTERTAINMENT BUZZ",
           description:
-            "After some doubts Singer Taylor Swift is able to sing her soul out in the O2 Arena...",
+            "After some doubts, Singer Taylor Swift is able to sing her soul out in the O2 Arena...",
           image: require("@/icons/music.jpg"),
           content: "Full article content here...",
         },

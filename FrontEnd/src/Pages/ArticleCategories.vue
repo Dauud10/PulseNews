@@ -1,49 +1,91 @@
 <template>
-  <h1>Choose Article</h1>
-  <div class="categories">Categories</div>
-  <div class="image-container">
-    <router-link to="@/pages/article detail"
-      ><img src="image1.jpg" alt="Category 1"
-    /></router-link>
-    <img src="image2.jpg" alt="Category 2" />
-    <img src="image3.jpg" alt="Category 3" />
+  <div class="categories-container">
+    <h1>Browse Articles by Category</h1>
+    <div class="category-list">
+      <div
+        class="category"
+        v-for="category in categories"
+        :key="category.id"
+        @click="filterArticles(category.id)"
+      >
+        <img
+          :src="category.image"
+          :alt="category.name"
+          class="category-image"
+        />
+        <p>{{ category.name }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
+<script>
+export default {
+  name: "ArticleCategories",
+  data() {
+    return {
+      categories: [
+        {
+          id: 1,
+          name: "Technology",
+        },
+        {
+          id: 2,
+          name: "Entertainment",
+        },
+        {
+          id: 3,
+          name: "Health",
+        },
+        // More categories...
+      ],
+    };
+  },
+  methods: {
+    filterArticles(categoryId) {
+      // Example redirection to filtered articles list based on category
+      this.$router.push({
+        name: "ArticleListByCategory",
+        params: { categoryId },
+      });
+    },
+  },
+};
+</script>
+
 <style scoped>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #f4f4f4;
+.categories-container {
+  text-align: center;
+  padding: 20px;
 }
+
 h1 {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 20px;
-  color: white;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
 }
-.categories {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 20px;
-  color: white;
-}
-.image-container {
+
+.category-list {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
-.image-container img {
+
+.category {
+  text-align: center;
+  cursor: pointer;
+}
+
+.category-image {
   width: 150px;
   height: 150px;
-  margin: 0 10px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.category p {
+  font-size: 1.1rem;
+  margin-top: 10px;
 }
 </style>
