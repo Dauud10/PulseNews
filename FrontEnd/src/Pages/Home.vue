@@ -1,30 +1,47 @@
 <template>
   <div class="home">
-    <!-- Use NavBar here -->
-    <NavBar />
+    <!-- Hero Section -->
+    <section class="hero text-center">
+      <img src="@/icons/pulsenews.png" alt="Pulse News Logo" class="logo" />
+      <h1>WELCOME TO PULSE NEWS</h1>
+      <p class="subtitle">Your daily source of news.</p>
+    </section>
 
-    <img src="@/icons/pulsenews.png" alt="Pulse News Logo" class="logo" />
-    <h1>WELCOME TO PULSE NEWS</h1>
-    <p>Your daily source of news.</p>
-    <SearchBar />
-    <div class="cards">
-      <Card v-for="article in articles" :key="article.id" :article="article" />
-    </div>
-
-    <Footer />
+    <!-- Articles Section -->
+    <section class="articles-section container">
+      <h2 class="section-title">Top Stories</h2>
+      <div class="row">
+        <div
+          class="col-md-4 mb-4"
+          v-for="article in articles"
+          :key="article.id"
+        >
+          <div class="card h-100">
+            <img
+              :src="article.image"
+              class="card-img-top"
+              alt="Article Image"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ article.title }}</h5>
+              <p class="card-text">{{ article.description }}</p>
+              <router-link
+                :to="`/article-detail/${article.id}`"
+                class="btn btn-danger"
+              >
+                Read More
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-import NavBar from "@/components/Organisms/NavBar.vue";
-import Footer from "@/components/Organisms/Article-Footer.vue";
-
 export default {
   name: "HomePage",
-  components: {
-    NavBar,
-    Footer,
-  },
   data() {
     return {
       articles: [
@@ -39,14 +56,14 @@ export default {
           id: 2,
           title: "ENTERTAINMENT BUZZ",
           description:
-            "After some doubts Singer Taylor Swift is able to sing her soul out in the O2 Arena...",
+            "After some doubts, singer Taylor Swift is able to sing her soul out in the O2 Arena...",
           image: require("@/icons/music.jpg"),
         },
         {
           id: 3,
           title: "BARCELONA VS BAYERN THRILLER",
           description:
-            "Bayern got absolutely thrashed 4-1 against their UCL rivals which was a very poor performance by the germans...",
+            "Bayern got absolutely thrashed 4-1 against their UCL rivals which was a very poor performance by the Germans...",
           image: require("@/icons/football.jpg"),
         },
       ],
@@ -57,27 +74,52 @@ export default {
 
 <style scoped>
 .home {
-  text-align: center;
-  background-color: silver;
-  color: black;
+  background: #1a1a1a;
+  color: white;
   min-height: 100vh;
   padding: 20px;
 }
 
 .logo {
-  width: 200px;
+  width: 180px;
   height: auto;
   margin-bottom: 20px;
 }
 
-.cards {
-  display: flex;
-  justify-content: space-around;
-  gap: 20px;
+.subtitle {
+  font-size: 1.2rem;
+  color: #cccccc;
 }
 
-.card img {
-  max-width: 100%;
-  height: auto;
+.section-title {
+  font-size: 2rem;
+  margin: 40px 0 20px;
+  color: #ff4242;
+  text-align: center;
+}
+
+.card {
+  background-color: #2a2a2a;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 66, 66, 0.2);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.card-title {
+  color: #ff4242;
+  font-weight: bold;
+}
+
+.btn-danger {
+  background-color: #ff4242;
+  border: none;
 }
 </style>

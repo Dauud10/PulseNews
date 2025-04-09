@@ -28,7 +28,7 @@ html {
   color: white; /* White text for contrast */
 }
 header {
-  background-color: #ff4242; /* Main Red Color for Header */
+  background: linear-gradient(90deg, #000000 0%, #1a1a1a 100%);
   color: white;
   padding: 1rem 2rem;
   text-align: center;
@@ -58,7 +58,7 @@ main {
   background-color: #222222; /* Dark background for main area */
 }
 footer {
-  background-color: #033d29; /* Dark Green Footer */
+  background: linear-gradient(90deg, #000000 0%, #1a1a1a 100%);
   color: white;
   text-align: center;
   padding: 1rem;

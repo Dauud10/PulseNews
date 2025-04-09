@@ -25,12 +25,14 @@ body {
 h1 {
   text-align: center;
   margin-top: 20px;
+  background: linear-gradient(90deg, #000000 0%, #1a1a1a 100%);
+  colour: white;
 }
 .categories {
   text-align: center;
   margin-top: 10px;
   font-size: 20px;
-  color: #333;
+  color: white;
 }
 .image-container {
   display: flex;

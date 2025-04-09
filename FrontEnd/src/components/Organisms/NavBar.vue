@@ -20,7 +20,7 @@
         exact-active-class="active"
         >CATEGORIES</router-link
       >
-      <router-link to="/contact" class="nav-link" exact-active-class="active"
+      <router-link to="/contact-us" class="nav-link" exact-active-class="active"
         >CONTACT</router-link
       >
     </nav>
