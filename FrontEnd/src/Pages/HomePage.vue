@@ -25,15 +25,26 @@
             <div class="card-body">
               <h5 class="card-title">{{ article.title }}</h5>
               <p class="card-text">{{ article.description }}</p>
-              <router-link
-                :to="`/article-detail/${article.id}`"
-                class="btn btn-danger"
-              >
+              <router-link ref="/" class="btn btn-danger" to="">
                 Read More
               </router-link>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container text-center">
+        <h2 class="cta-title">Stay Informed with PulseNews</h2>
+        <p class="cta-text">
+          Join thousands of readers who rely on PulseNews daily. Stay updated,
+          stay aware.
+        </p>
+        <button class="btn btn-danger btn-lg" @click="goToCategories">
+          Explore Articles
+        </button>
       </div>
     </section>
   </div>
@@ -68,6 +79,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    goToCategories() {
+      this.$router.push({ name: "ArticleCategories" });
+    },
   },
 };
 </script>
@@ -121,5 +137,42 @@ export default {
 .btn-danger {
   background-color: #ff4242;
   border: none;
+}
+
+.content-box {
+  background: #2a2a2a;
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0px 4px 10px rgba(255, 66, 66, 0.2);
+}
+
+p {
+  font-size: 18px;
+  color: #cccccc;
+}
+
+.cta-section {
+  background: black;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+  margin: 50px 0;
+  border-radius: 30px;
+}
+
+.cta-title {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.cta-text {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #f4f4f4;
+}
+
+hr {
+  margin-top: 50px;
+  border-color: #ff4242;
 }
 </style>

@@ -28,14 +28,14 @@
         <div class="form-space"></div>
 
         <p>
-          <router-link to="/forgot-password" class="forgot-password-link"
+          <router-link to="/login" class="forgot-password-link"
             >Forgot password?</router-link
           >
         </p>
 
         <!-- Add AdminLogin button between forgot password and register link -->
         <div class="form-space"></div>
-        <router-link to="/src/Pages/AdminLoginPage" class="admin-login-button"
+        <router-link to="/adminlogin" class="admin-login-button"
           >ADMIN LOGIN</router-link
         >
 

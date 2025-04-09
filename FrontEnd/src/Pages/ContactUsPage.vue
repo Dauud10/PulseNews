@@ -56,10 +56,10 @@
           <div class="col-md-6">
             <h2>Contact Information</h2>
             <p>
-              <i class="fas fa-map-marker-alt"></i> 123 Pulse Street, Newsville
+              <i class="fas fa-map-marker-alt"></i> TUS, Moylish Campus, Moylish
             </p>
-            <p><i class="fas fa-envelope"></i> contact@pulsenews.com</p>
-            <p><i class="fas fa-phone"></i> +123 456 7890</p>
+            <p><i class="fas fa-envelope"></i> TUS.Midwest@.ie</p>
+            <p><i class="fas fa-phone"></i> 089 123 4567</p>
           </div>
         </div>
       </div>

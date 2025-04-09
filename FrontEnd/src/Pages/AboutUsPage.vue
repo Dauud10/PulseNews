@@ -56,7 +56,9 @@
           Join thousands of readers who rely on PulseNews daily. Stay updated,
           stay aware.
         </p>
-        <button class="btn btn-danger btn-lg">Explore Articles</button>
+        <button class="btn btn-danger btn-lg" @click="goToCategories">
+          Explore Articles
+        </button>
       </div>
     </div>
   </div>
@@ -64,7 +66,12 @@
 
 <script>
 export default {
-  name: "AboutUs",
+  name: "AboutUsPage",
+  methods: {
+    goToCategories() {
+      this.$router.push({ name: "ArticleCategories" });
+    },
+  },
 };
 </script>
 
@@ -77,8 +84,8 @@ export default {
 }
 
 .hero-section {
-  background: linear-gradient(90deg, #ff4242 0%, #2a2a2a 100%);
-  padding: 80px 20px;
+  background: linear-gradient(90deg, #000000 0%, #1a1a1a 100%);
+  padding: 40px 20px;
 }
 
 .hero-section h1 {
