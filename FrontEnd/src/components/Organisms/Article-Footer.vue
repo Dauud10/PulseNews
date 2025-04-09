@@ -1,50 +1,53 @@
 <template>
   <footer class="footer">
     <div class="container">
-      <div class="row">
-        <!-- Logo & Newsletter -->
-        <div class="col-md-3 text-center text-md-start">
-          <!-- Optional logo or newsletter content here -->
+      <div class="footer-grid">
+        <!-- Support & Donate -->
+        <div class="footer-section">
+          <p class="footer-heading">Stay Informed</p>
+          <p>Support journalism:</p>
+          <button class="btn-donate">DONATE</button>
         </div>
 
-        <!-- Donate & Contact Info -->
-        <div class="col-md-3 text-left">
-          <p class="footer-text">Stay Informed</p>
-          <p class="footer-text">Support journalism:</p>
-          <button class="btn btn-donate mb-3">DONATE</button>
+        <!-- Categories -->
+        <div class="footer-section">
+          <p class="footer-heading">Article Categories</p>
+          <ul>
+            <li><a href="/politics" class="footer-link">Politics</a></li>
+            <li><a href="/technology" class="footer-link">Technology</a></li>
+            <li><a href="/business" class="footer-link">Business</a></li>
+            <li><a href="/lifestyle" class="footer-link">Lifestyle</a></li>
+          </ul>
         </div>
 
-        <!-- Article Categories Links -->
-        <div class="col-md-3 text-left">
-          <p class="footer-text">Article Categories:</p>
-          <p><a href="/politics" class="footer-link">Politics</a></p>
-          <p><a href="/technology" class="footer-link">Technology</a></p>
-          <p><a href="/business" class="footer-link">Business</a></p>
-          <p><a href="/lifestyle" class="footer-link">Lifestyle</a></p>
-        </div>
-
-        <!-- Useful Resources -->
-        <div class="col-md-3 text-left">
-          <p class="footer-text">Useful Resources:</p>
-          <p><a href="/faq" class="footer-link">FAQ</a></p>
-          <p><a href="/sitemap" class="footer-link">Sitemap</a></p>
-          <p><a href="/about-us" class="footer-link">About Us</a></p>
-          <p><a href="/contact-us" class="footer-link">Contact Us</a></p>
+        <!-- Resources -->
+        <div class="footer-section">
+          <p class="footer-heading">Useful Resources</p>
+          <ul>
+            <li><a href="/faq" class="footer-link">FAQ</a></li>
+            <li><a href="/sitemap" class="footer-link">Sitemap</a></li>
+            <li><a href="/about-us" class="footer-link">About Us</a></li>
+            <li><a href="/contact-us" class="footer-link">Contact Us</a></li>
+          </ul>
         </div>
 
         <!-- Legal -->
-        <div class="col-md-3 text-left">
-          <p class="footer-text">Legal:</p>
-          <p><a href="/imprint" class="footer-link">Imprint</a></p>
-          <p>
-            <a href="/terms-and-conditions" class="footer-link"
-              >Terms & Conditions</a
-            >
-          </p>
-          <p>
-            <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
-          </p>
-          <p><a href="/cookie-policy" class="footer-link">Cookie Policy</a></p>
+        <div class="footer-section">
+          <p class="footer-heading">Legal</p>
+          <ul>
+            <li><a href="/imprint" class="footer-link">Imprint</a></li>
+            <li>
+              <a href="/terms-and-conditions" class="footer-link"
+                >Terms & Conditions</a
+              >
+            </li>
+            <li>
+              <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="/cookie-policy" class="footer-link">Cookie Policy</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -53,28 +56,41 @@
 
 <script>
 export default {
-  name: "FooterComponent",
+  name: "ArticleFooter",
 };
 </script>
 
 <style scoped>
 .footer {
-  background-color: #222; /* Dark Gray for consistency */
+  background-color: #222;
   color: white;
-  border-top: 2px solid #ff4242; /* Red border */
-  padding: 1rem 2rem; /* Match navbar padding */
+  border-top: 2px solid #ff4242;
+  padding: 2rem 1rem;
 }
 
-.footer-text {
-  color: white;
-  font-size: 1rem; /* Match navbar font size */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-heading {
+  color: #ff4242;
+  font-weight: bold;
   margin-bottom: 0.5rem;
+  font-size: 1.1rem;
 }
 
 .footer-link {
-  color: #ff4242; /* Red color for links */
+  color: #ff4242;
   text-decoration: none;
-  font-size: 1rem; /* Match navbar font size */
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
 }
 
 .footer-link:hover {
@@ -82,29 +98,29 @@ export default {
 }
 
 .btn-donate {
-  background-color: #ff4242; /* Red button */
+  background-color: #ff4242;
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 1rem;
+  padding: 8px 16px;
+  margin-top: 10px;
+  font-size: 0.95rem;
   cursor: pointer;
+  width: fit-content;
   transition: background-color 0.3s ease;
 }
 
 .btn-donate:hover {
-  background-color: #d93636; /* Darker red on hover */
+  background-color: #d93636;
 }
 
-/* Ensure text and links are legible on smaller screens */
 @media (max-width: 768px) {
   .footer {
-    padding: 1.5rem 1rem; /* Adjust padding for smaller screens */
+    padding: 1.5rem 1rem;
   }
 
-  .footer-text,
   .footer-link {
-    font-size: 0.9rem; /* Slightly smaller font size for mobile */
+    font-size: 0.9rem;
   }
 }
 </style>

@@ -3,7 +3,8 @@
     <div class="login-container">
       <img src="@/icons/pulsenews.png" alt="PulseNews Logo" class="logo" />
       <h1>REGISTER TO PULSE NEWS</h1>
-      <form @submit.prevent="handleLogin">
+
+      <form @submit.prevent="handleRegister">
         <label for="email">Enter your email:</label>
         <input
           id="email"
@@ -13,7 +14,7 @@
           required
         />
 
-        <label for="password">Enter your password:</label>
+        <label for="password">Create New Password:</label>
         <input
           id="password"
           v-model="password"
@@ -22,14 +23,21 @@
           required
         />
 
-        <button type="submit" class="login-button">LOG IN</button>
+        <label for="confirmPassword">Confirm New Password:</label>
+        <input
+          id="confirmPassword"
+          v-model="confirmPassword"
+          type="password"
+          placeholder="Confirm your password"
+          required
+        />
+
+        <button type="submit" class="register-button">REGISTER</button>
       </form>
+
       <p>
-        Don't have an account?
-        <router-link to="/register">Register</router-link>
-      </p>
-      <p>
-        <router-link to="/forgot-password">Forgot password?</router-link>
+        Already have an account?
+        <router-link to="/login">Log in</router-link>
       </p>
     </div>
   </div>
@@ -37,22 +45,29 @@
 
 <script>
 export default {
-  name: "LoginPage",
+  name: "RegisterPage",
   data() {
     return {
       email: "",
       password: "",
+      confirmPassword: "",
     };
   },
   methods: {
-    handleLogin() {
-      // Example of login logic (to replace with API call)
-      if (this.email && this.password) {
-        console.log("Logging in with:", this.email, this.password);
-        this.$router.push("/dashboard");
-      } else {
+    handleRegister() {
+      if (!this.email || !this.password || !this.confirmPassword) {
         alert("Please fill out all fields.");
+        return;
       }
+
+      if (this.password !== this.confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      console.log("Registering:", this.email);
+      // Replace with your API call or logic
+      this.$router.push("/dashboard");
     },
   },
 };
@@ -117,7 +132,7 @@ input:focus {
   border-color: #ff4242;
 }
 
-.login-button {
+.register-button {
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -128,7 +143,7 @@ input:focus {
   transition: background 0.3s ease;
 }
 
-.login-button:hover {
+.register-button:hover {
   background: #d93636;
 }
 

@@ -135,6 +135,12 @@ onMounted(fetchArticles);
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+h2 {
+  text-align: left;
+  margin-top: 10px;
+  font-size: 33px;
+  color: white;
+}
 
 .btn:hover {
   background-color: #d93636; /* Darker red on hover */

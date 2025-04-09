@@ -140,6 +140,12 @@ export default {
 </template>
 
 <style scoped>
+h2 {
+  text-align: left;
+  margin-top: 10px;
+  font-size: 33px;
+  color: white;
+}
 .btn {
   margin: 20px;
   background-color: #ff4242; /* Red background for consistency */

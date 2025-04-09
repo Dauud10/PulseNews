@@ -25,23 +25,24 @@
       >
     </nav>
 
-    <!-- Search Bar and User Actions -->
+    <!-- Search Bar and Log In -->
     <div class="actions">
-      <div class="search-container">
-        <input
-          type="text"
-          v-model="searchQuery"
-          placeholder="Search"
-          class="search-bar"
-          @keypress.enter="performSearch"
-        />
-      </div>
-      <router-link to="/login" class="nav-link" exact-active-class="active"
+      <input
+        type="text"
+        v-model="searchQuery"
+        placeholder="Search"
+        class="search-bar"
+        @keypress.enter="performSearch"
+      />
+      <router-link
+        to="/login"
+        class="nav-link login-link"
+        exact-active-class="active"
         >LOG IN</router-link
       >
     </div>
 
-    <!-- Mobile Menu Toggle -->
+    <!-- Mobile Toggle -->
     <button class="menu-toggle" @click="toggleMobileMenu">
       <i class="fas fa-bars"></i>
     </button>
@@ -52,16 +53,22 @@
         >HOME</router-link
       >
       <router-link
+        to="/article-detail"
+        class="nav-link"
+        @click="toggleMobileMenu"
+        >ARTICLE DETAIL</router-link
+      >
+      <router-link
         to="/articlecategories"
         class="nav-link"
         @click="toggleMobileMenu"
         >CATEGORIES</router-link
       >
-      <router-link to="/contact" class="nav-link" @click="toggleMobileMenu"
+      <router-link to="/contact-us" class="nav-link" @click="toggleMobileMenu"
         >CONTACT</router-link
       >
       <router-link to="/login" class="nav-link" @click="toggleMobileMenu"
-        >LOGIN</router-link
+        >LOG IN</router-link
       >
     </div>
   </header>
@@ -77,12 +84,13 @@ export default {
   data() {
     return {
       isMobileMenuOpen: false,
+      searchQuery: "",
     };
   },
   setup() {
     useRouter();
     const performSearch = () => {
-      // Implement search logic here if needed
+      // Add search logic if needed
     };
 
     return { performSearch };
@@ -96,46 +104,54 @@ export default {
 </script>
 
 <style scoped>
-/* General Styling */
 .pulse-header {
-  background-color: black;
+  background-color: #222;
   color: white;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding: 1rem 2rem;
+  flex-wrap: wrap;
+  border-bottom: 2px solid #ff4242;
 }
 
 .nav-links {
   display: flex;
   gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .nav-link {
   color: white;
   text-decoration: none;
-  font-size: 1rem;
   font-weight: bold;
+  font-size: 1rem;
   transition: color 0.3s ease;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: #ff4242; /* Red color on hover */
+  color: #ff4242;
+}
+
+.login-link {
+  font-weight: bold;
 }
 
 .actions {
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .search-bar {
-  padding: 0.5rem;
-  border-radius: 5px;
-  border: 1px solid #444;
   background-color: #333;
   color: white;
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 0.5rem 0.75rem;
+  transition: border-color 0.3s ease;
 }
 
 .search-bar:focus {
@@ -144,40 +160,34 @@ export default {
 }
 
 .menu-toggle {
+  display: none;
   background: none;
   border: none;
   color: white;
   font-size: 1.5rem;
   cursor: pointer;
-  display: none;
 }
 
 .mobile-menu {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  background-color: black;
-  color: white;
+  background-color: #111;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: 1.5rem 0;
   gap: 1rem;
-  z-index: 100;
+  border-top: 1px solid #333;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  .nav-links {
+  .nav-links,
+  .actions {
     display: none;
   }
 
-  .mobile-menu {
-    display: flex;
+  .menu-toggle {
+    display: block;
   }
 }
 </style>
