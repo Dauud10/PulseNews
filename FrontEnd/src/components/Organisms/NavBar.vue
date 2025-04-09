@@ -14,6 +14,12 @@
         exact-active-class="active"
         >CATEGORIES</router-link
       >
+      <router-link
+          to="/aboutus"
+          class="nav-link"
+          exact-active-class="active"
+      >ABOUT US</router-link
+      >
       <router-link to="/contact-us" class="nav-link" exact-active-class="active"
         >CONTACT US</router-link
       >

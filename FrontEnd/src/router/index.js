@@ -1,32 +1,59 @@
 import { createRouter, createWebHistory } from "vue-router";
+
 import Home from "@/Pages/HomePage.vue";
-import RegisterPage from "@/Pages/RegisterPage.vue";
-import CategoryList from "@/Pages/CategoryList.vue";
-import CategoryForm from "@/Pages/CategoryForm.vue";
+import AboutUsPage from "@/Pages/AboutUsPage.vue";
+import ArticleCategories from "@/Pages/ArticleCategories.vue";
+import ContactUs from "@/Pages/ContactUsPage.vue";
+
 import LoginPage from "@/Pages/LoginPage.vue";
 import AdminLogin from "@/Pages/AdminLoginPage.vue";
+import RegisterPage from "@/Pages/RegisterPage.vue";
+
 import AdminDashboard from "@/Pages/AdminDashboard.vue";
+import CategoryList from "@/Pages/CategoryList.vue";
+import CategoryForm from "@/Pages/CategoryForm.vue";
 import ArticleList from "@/Pages/ArticleList.vue";
 import ArticleForm from "@/Pages/ArticleForm.vue";
-import ContactUs from "@/Pages/ContactUsPage.vue";
-import ArticleCategories from "@/Pages/ArticleCategories.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home, // Default route, showing Home page
+    component: Home,
+  },
+  {
+    path: "/about-us",
+    name: "About",
+    component: AboutUsPage,
+  },
+
+  {
+    path: "/articlecategories",
+    name: "ArticleCategories",
+    component: ArticleCategories,
   },
   {
     path: "/contact-us",
     name: "Contact",
     component: ContactUs,
   },
+
+  {
+    path: "/login",
+    name: "Login",
+    component: LoginPage,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: RegisterPage,
+  },
   {
     path: "/adminlogin",
     name: "AdminLogin", // Ensure you name the route
     component: AdminLogin,
   },
+
   {
     path: "/admin-dashboard",
     name: "AdminDashboard",
@@ -36,21 +63,6 @@ const routes = [
     path: "/category-list",
     name: "CategoryList",
     component: CategoryList,
-  },
-  {
-    path: "/register",
-    name: "Register",
-    component: RegisterPage,
-  },
-  {
-    path: "/articlecategories",
-    name: "ArticleCategories",
-    component: ArticleCategories,
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: LoginPage,
   },
   {
     path: "/article-list",
@@ -90,5 +102,4 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
-
 export default router;
