@@ -13,10 +13,10 @@
         <div class="footer-section">
           <p class="footer-heading">Article Categories</p>
           <ul>
-            <li><a href="/politics" class="footer-link">Politics</a></li>
-            <li><a href="/technology" class="footer-link">Technology</a></li>
-            <li><a href="/business" class="footer-link">Business</a></li>
-            <li><a href="/lifestyle" class="footer-link">Lifestyle</a></li>
+            <li><a href="/" class="footer-link">Politics</a></li>
+            <li><a href="/t" class="footer-link">Technology</a></li>
+            <li><a href="/" class="footer-link">Business</a></li>
+            <li><a href="/" class="footer-link">Lifestyle</a></li>
           </ul>
         </div>
 
@@ -24,9 +24,9 @@
         <div class="footer-section">
           <p class="footer-heading">Useful Resources</p>
           <ul>
-            <li><a href="/faq" class="footer-link">FAQ</a></li>
-            <li><a href="/sitemap" class="footer-link">Sitemap</a></li>
-            <li><a href="/about-us" class="footer-link">About Us</a></li>
+            <li><a href="/" class="footer-link">FAQ</a></li>
+            <li><a href="/" class="footer-link">Sitemap</a></li>
+            <li><a href="/" class="footer-link">About Us</a></li>
             <li><a href="/contact-us" class="footer-link">Contact Us</a></li>
           </ul>
         </div>
@@ -35,17 +35,15 @@
         <div class="footer-section">
           <p class="footer-heading">Legal</p>
           <ul>
-            <li><a href="/imprint" class="footer-link">Imprint</a></li>
+            <li><a href="/" class="footer-link">Imprint</a></li>
             <li>
-              <a href="/terms-and-conditions" class="footer-link"
-                >Terms & Conditions</a
-              >
+              <a href="/" class="footer-link">Terms & Conditions</a>
             </li>
             <li>
-              <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+              <a href="/" class="footer-link">Privacy Policy</a>
             </li>
             <li>
-              <a href="/cookie-policy" class="footer-link">Cookie Policy</a>
+              <a href="/" class="footer-link">Cookie Policy</a>
             </li>
           </ul>
         </div>

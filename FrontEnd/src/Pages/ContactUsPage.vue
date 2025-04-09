@@ -3,7 +3,7 @@
     <!-- Hero Section -->
     <section class="hero-section">
       <div class="container text-center text-white">
-        <h1>Contact Us</h1>
+        <h1>CONTACT US</h1>
         <p>
           Have a question? Reach out to us, and we'll get back to you as soon as
           possible.

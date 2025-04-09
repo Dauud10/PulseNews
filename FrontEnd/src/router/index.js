@@ -1,16 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/Pages/Home.vue";
+import Home from "@/Pages/HomePage.vue";
 import RegisterPage from "@/Pages/RegisterPage.vue";
 import CategoryList from "@/Pages/CategoryList.vue";
 import CategoryForm from "@/Pages/CategoryForm.vue";
 import LoginPage from "@/Pages/LoginPage.vue";
-import AdminLogin from "@/Pages/AdminLogin.vue";
+import AdminLogin from "@/Pages/AdminLoginPage.vue";
 import AdminDashboard from "@/Pages/AdminDashboard.vue";
 import ArticleList from "@/Pages/ArticleList.vue";
 import ArticleForm from "@/Pages/ArticleForm.vue";
-import ContactUs from "@/Pages/ContactUs.vue";
+import ContactUs from "@/Pages/ContactUsPage.vue";
 import ArticleCategories from "@/Pages/ArticleCategories.vue";
-import ArticleDetailPage from "@/Pages/ArticleDetail.vue"; // Import ArticleDetailPage
 
 const routes = [
   {
@@ -72,12 +71,6 @@ const routes = [
     path: "/edit-article/:id",
     name: "EditArticle",
     component: ArticleForm,
-    props: true, // Passing dynamic parameter (id) as prop
-  },
-  {
-    path: "/article/:id", // New route for Article Detail Page
-    name: "ArticleDetail", // Ensure the name is unique
-    component: ArticleDetailPage,
     props: true, // Passing dynamic parameter (id) as prop
   },
   {

@@ -35,7 +35,7 @@
 
         <!-- Add AdminLogin button between forgot password and register link -->
         <div class="form-space"></div>
-        <router-link to="/adminlogin" class="admin-login-button"
+        <router-link to="/src/Pages/AdminLoginPage" class="admin-login-button"
           >ADMIN LOGIN</router-link
         >
 

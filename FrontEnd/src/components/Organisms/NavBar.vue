@@ -9,19 +9,13 @@
         >HOME</router-link
       >
       <router-link
-        to="/article-detail"
-        class="nav-link"
-        exact-active-class="active"
-        >ARTICLE DETAIL</router-link
-      >
-      <router-link
         to="/articlecategories"
         class="nav-link"
         exact-active-class="active"
         >CATEGORIES</router-link
       >
       <router-link to="/contact-us" class="nav-link" exact-active-class="active"
-        >CONTACT</router-link
+        >CONTACT US</router-link
       >
     </nav>
 
