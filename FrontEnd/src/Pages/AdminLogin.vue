@@ -41,7 +41,7 @@ export default {
     handleAdminLogin() {
       if (this.email && this.password) {
         console.log("Admin logging in:", this.email);
-        this.$router.push("/admin dashboard");
+        this.$router.push("/admin-dashboard"); // Correct path to AdminDashboard
       } else {
         alert("Please fill out all fields.");
       }

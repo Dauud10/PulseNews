@@ -17,7 +17,7 @@
 
 <script>
 import NavBar from "@/components/Organisms/NavBar.vue";
-import Footer from "@/components/Organisms/SiteFooter.vue";
+import Footer from "@/components/Organisms/Article-Footer.vue";
 
 export default {
   name: "HomePage",

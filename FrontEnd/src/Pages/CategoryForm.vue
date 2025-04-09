@@ -61,7 +61,7 @@ onMounted(fetchCategory);
     </form>
     <hr />
     <!-- Back to Category List -->
-    <router-link to="/categorylist" class="btn btn-secondary"
+    <router-link to="/category-list" class="btn btn-secondary"
       >Back to Category List</router-link
     >
   </div>

@@ -68,7 +68,7 @@
 
     <hr />
 
-    <router-link to="/articlelist" class="btn btn-secondary"
+    <router-link to="/article-list" class="btn btn-secondary"
       >Back to Article List</router-link
     >
   </div>

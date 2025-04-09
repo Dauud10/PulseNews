@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0add7404-1d25-4a49-b57f-5c726e81e7b4" name="Changes" comment="" />
+    <list default="true" id="0add7404-1d25-4a49-b57f-5c726e81e7b4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../BackEnd/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../BackEnd/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../FrontEnd/src/components/Organisms/NavBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../FrontEnd/src/components/Organisms/NavBar.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,7 +41,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Dell/OneDrive - TUS MM/Desktop/ArticleProject/PulseNews/FrontEndTest",
+    "last_opened_file_path": "C:/Users/Dell/OneDrive - TUS MM/Desktop/FrontEndTest",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -69,6 +72,7 @@
       <workItem from="1744066147388" duration="3907000" />
       <workItem from="1744072970941" duration="46000" />
       <workItem from="1744121401611" duration="3219000" />
+      <workItem from="1744154133950" duration="135000" />
     </task>
     <servers />
   </component>
@@ -81,7 +85,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/App.vue</url>
           <line>24</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

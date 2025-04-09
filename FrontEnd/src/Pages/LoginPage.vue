@@ -23,17 +23,31 @@
         />
 
         <button type="submit" class="login-button">LOG IN</button>
+
+        <!-- Space between login and register buttons -->
+        <div class="form-space"></div>
+
+        <p>
+          <router-link to="/forgot-password" class="forgot-password-link"
+            >Forgot password?</router-link
+          >
+        </p>
+
+        <!-- Add AdminLogin button between forgot password and register link -->
+        <div class="form-space"></div>
+        <router-link to="/adminlogin" class="admin-login-button"
+          >ADMIN LOGIN</router-link
+        >
+
+        <div class="form-space"></div>
+
+        <p>
+          Don't have an account?
+          <router-link to="/register" class="register-button"
+            >Register</router-link
+          >
+        </p>
       </form>
-      <p>
-        Don't have an account?
-        <router-link to="/register" class="register-button"
-          >Register</router-link
-        >
-        >
-      </p>
-      <p>
-        <router-link to="/forgot-password">Forgot password?</router-link>
-      </p>
     </div>
   </div>
 </template>
@@ -135,6 +149,11 @@ input:focus {
   background: #d93636;
 }
 
+/* Space between buttons */
+.form-space {
+  height: 20px; /* Adjust height as needed */
+}
+
 router-link {
   color: #ff4242;
   text-decoration: none;
@@ -144,7 +163,9 @@ router-link {
 router-link:hover {
   text-decoration: underline;
 }
-.register-button {
+
+.register-button,
+.admin-login-button {
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -153,5 +174,20 @@ router-link:hover {
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s ease;
+}
+
+.register-button:hover,
+.admin-login-button:hover {
+  background: #d93636;
+}
+
+.forgot-password-link {
+  color: #ff4242;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
 }
 </style>

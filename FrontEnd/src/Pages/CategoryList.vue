@@ -59,7 +59,7 @@ export default {
     <router-link to="/add-category" class="btn btn-success mb-3"
       >Add Category</router-link
     >
-    <router-link to="/admindashboard" class="btn btn-success mb-3"
+    <router-link to="/admin-dashboard" class="btn btn-success mb-3"
       >Back to Admin Dashboard</router-link
     >
 
@@ -142,5 +142,22 @@ export default {
 <style scoped>
 .btn {
   margin: 20px;
+  background-color: #ff4242; /* Red background for consistency */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #d93636; /* Darker red on hover */
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 66, 66, 0.5); /* Subtle outline on focus */
 }
 </style>
