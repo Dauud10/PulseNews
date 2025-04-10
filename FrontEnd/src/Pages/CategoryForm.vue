@@ -43,7 +43,7 @@ export default {
     };
   },
   mounted() {
-    if (this.$route.params.id) {
+    if (this.$route.params.name === "EditCategory" && this.$route.params.id) {
       this.isEditing = true;
       this.fetchCategory();
     }
@@ -52,7 +52,7 @@ export default {
     // Fetch category details when editing
     fetchCategory() {
       axios
-        .get(`http://localhost:8080/categories/${this.$route.params.id}`)
+        .get(`http://localhost:8083/categories/${this.$route.params.id}`)
         .then((response) => {
           this.category = response.data;
         })
@@ -62,8 +62,8 @@ export default {
     // Save category (either add or update)
     saveCategory() {
       const url = this.isEditing
-        ? `http://localhost:8080/categories/${this.$route.params.id}`
-        : "http://localhost:8080/categories";
+        ? `http://localhost:8083/categories/${this.$route.params.id}`
+        : "http://localhost:8083/categories";
       const method = this.isEditing ? "put" : "post";
 
       axios[method](url, this.category)

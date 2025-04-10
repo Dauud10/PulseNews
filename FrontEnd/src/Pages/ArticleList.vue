@@ -96,7 +96,7 @@ let deleteModalInstance = null;
 
 const fetchArticles = () => {
   axios
-    .get("http://localhost:8080/articles")
+    .get("http://localhost:8083/articles")
     .then((response) => {
       articleList.value = response.data;
     })
@@ -111,7 +111,7 @@ const showDeleteModal = (article) => {
 
 const deleteArticle = () => {
   axios
-    .delete(`http://localhost:8080/articles/${selectedArticle.value.id}`)
+    .delete(`http://localhost:8083/articles/${selectedArticle.value.id}`)
     .then(() => {
       successMessage.value = "Article deleted successfully!";
       fetchArticles();

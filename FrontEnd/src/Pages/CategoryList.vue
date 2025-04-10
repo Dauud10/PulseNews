@@ -86,7 +86,7 @@ let deleteModalInstance = null;
 
 const fetchCategories = () => {
   axios
-    .get("http://localhost:8080/categories")
+    .get("http://localhost:8083/categories")
     .then((response) => {
       categoryList.value = response.data;
     })
@@ -101,7 +101,7 @@ const showDeleteModal = (category) => {
 
 const deleteCategory = () => {
   axios
-    .delete(`http://localhost:8080/categories/${selectedCategory.value.id}`)
+    .delete(`http://localhost:8083/categories/${selectedCategory.value.id}`)
     .then(() => {
       successMessage.value = "Category deleted successfully!";
       fetchCategories();

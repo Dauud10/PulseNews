@@ -103,7 +103,7 @@ export default {
   methods: {
     fetchCategories() {
       axios
-        .get("http://localhost:8080/categories")
+        .get("http://localhost:8083/categories")
         .then((response) => {
           this.categories = response.data;
         })
@@ -111,7 +111,7 @@ export default {
     },
     fetchArticle() {
       axios
-        .get(`http://localhost:8080/articles/${this.$route.params.id}`)
+        .get(`http://localhost:8083/articles/${this.$route.params.id}`)
         .then((response) => {
           this.article = response.data;
         })
@@ -119,8 +119,8 @@ export default {
     },
     saveArticle() {
       const url = this.isEditing
-        ? `http://localhost:8080/articles/${this.$route.params.id}`
-        : "http://localhost:8080/articles";
+        ? `http://localhost:8083/articles/${this.$route.params.id}`
+        : "http://localhost:8083/articles";
 
       const method = this.isEditing ? "put" : "post";
 
