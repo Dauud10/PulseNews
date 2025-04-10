@@ -1,6 +1,6 @@
 package com.example.backend.Controller;
 
-import DTO.ArticleDTO;
+import com.example.backend.DTO.ArticleDTO;  // Correct import
 import com.example.backend.Model.Article;
 import com.example.backend.Model.Category;
 import com.example.backend.Service.ArticleService;
@@ -75,4 +75,5 @@ public class ArticleController {
         return ResponseEntity.ok("Article deleted successfully!");
     }
 }
+
 

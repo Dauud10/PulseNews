@@ -1,6 +1,6 @@
 package com.example.backend.Controller;
 
-import DTO.CategoryDTO;
+import com.example.backend.DTO.CategoryDTO;  // Correct import
 import com.example.backend.Model.Category;
 import com.example.backend.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,3 +78,4 @@ public class CategoryController {
         return ResponseEntity.ok("Category deleted successfully!");
     }
 }
+
