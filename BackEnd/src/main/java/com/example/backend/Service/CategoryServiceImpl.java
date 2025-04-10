@@ -2,11 +2,11 @@ package com.example.backend.Service;
 
 import com.example.backend.Model.Category;
 import com.example.backend.Repository.CategoryRepository;
+import com.example.backend.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -38,3 +38,4 @@ public class CategoryServiceImpl implements CategoryService {
         return false;
     }
 }
+

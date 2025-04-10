@@ -1,47 +1,7 @@
-<script setup>
-import { ref, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import axios from "axios";
-const route = useRoute();
-const router = useRouter();
-const category = ref({
-  name: "",
-});
-const isEditing = ref(false);
-
-const saveCategory = () => {
-  if (isEditing.value) {
-    axios
-      .put(
-        `http://localhost:8080/categories/${route.params.id}`,
-        category.value
-      )
-      .then(() => router.push("/CategoryList"))
-      .catch((error) => console.error("Error updating category:", error));
-  } else {
-    axios
-      .post("http://localhost:8080/categories", category.value)
-      .then(() => router.push("/CategoryList"))
-      .catch((error) => console.error("Error adding category:", error));
-  }
-};
-const fetchCategory = () => {
-  if (route.params.id) {
-    isEditing.value = true;
-    axios
-      .get(`http://localhost:8080/categories/${route.params.id}`)
-      .then((response) => {
-        category.value = response.data;
-      })
-      .catch((error) => console.error("Error fetching category:", error));
-  }
-};
-
-onMounted(fetchCategory);
-</script>
 <template>
   <div class="container">
     <h2 class="mt-4">{{ isEditing ? "Update Category" : "Add Category" }}</h2>
+
     <form @submit.prevent="saveCategory">
       <!-- Name -->
       <div class="form-group">
@@ -54,15 +14,79 @@ onMounted(fetchCategory);
           required
         />
       </div>
+
       <!-- Submit Button -->
       <button type="submit" class="btn btn-primary">
         {{ isEditing ? "Update Category" : "Add Category" }}
       </button>
     </form>
+
     <hr />
     <!-- Back to Category List -->
-    <router-link to="/category-list" class="btn btn-secondary"
-      >Back to Category List</router-link
-    >
+    <router-link to="/category-list" class="btn btn-secondary">
+      Back to Category List
+    </router-link>
   </div>
 </template>
+
+<script>
+import axios from "axios";
+
+export default {
+  name: "CategoryForm",
+  data() {
+    return {
+      category: {
+        name: "",
+      },
+      isEditing: false,
+    };
+  },
+  mounted() {
+    if (this.$route.params.id) {
+      this.isEditing = true;
+      this.fetchCategory();
+    }
+  },
+  methods: {
+    // Fetch category details when editing
+    fetchCategory() {
+      axios
+        .get(`http://localhost:8080/categories/${this.$route.params.id}`)
+        .then((response) => {
+          this.category = response.data;
+        })
+        .catch((error) => console.error("Error fetching category:", error));
+    },
+
+    // Save category (either add or update)
+    saveCategory() {
+      const url = this.isEditing
+        ? `http://localhost:8080/categories/${this.$route.params.id}`
+        : "http://localhost:8080/categories";
+      const method = this.isEditing ? "put" : "post";
+
+      axios[method](url, this.category)
+        .then(() => {
+          this.$router.push("/category-list");
+        })
+        .catch((error) => console.error("Error saving category:", error));
+    },
+  },
+};
+</script>
+
+<style scoped>
+.container {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #ff4242;
+  color: white;
+}
+</style>

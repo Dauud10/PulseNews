@@ -1,17 +1,18 @@
 package com.example.backend.Controller;
 
-import com.example.backend.Controller.ArticleDTO;
+import DTO.ArticleDTO;
 import com.example.backend.Model.Article;
 import com.example.backend.Model.Category;
 import com.example.backend.Service.ArticleService;
 import com.example.backend.Service.CategoryService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +42,7 @@ public class ArticleController {
         article.setTitle(dto.getTitle());
         article.setContent(dto.getContent());
         article.setAuthor(dto.getAuthor());
-
+        article.setPublishedAt(LocalDate.now());
         Category category = categoryService.getCategoryById(dto.getCategoryId());
         article.setCategory(category);
         return article;
@@ -50,18 +51,14 @@ public class ArticleController {
     @GetMapping
     public ResponseEntity<List<ArticleDTO>> getAllArticles() {
         List<Article> articles = articleService.getAllArticles();
-        List<ArticleDTO> dtoList = articles.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        List<ArticleDTO> dtoList = articles.stream().map(this::convertToDTO).collect(Collectors.toList());
         return ResponseEntity.ok(dtoList);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ArticleDTO> getArticleById(@PathVariable Long id) {
         Article article = articleService.getArticleById(id);
-        if (article == null) {
-            return ResponseEntity.notFound().build();
-        }
+        if (article == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(convertToDTO(article));
     }
 
@@ -71,28 +68,11 @@ public class ArticleController {
         return new ResponseEntity<>(convertToDTO(saved), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ArticleDTO> updateArticle(@PathVariable Long id, @Valid @RequestBody ArticleDTO dto) {
-        Article existing = articleService.getArticleById(id);
-        if (existing == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        existing.setTitle(dto.getTitle());
-        existing.setContent(dto.getContent());
-        existing.setAuthor(dto.getAuthor());
-        existing.setCategory(categoryService.getCategoryById(dto.getCategoryId()));
-
-        Article updated = articleService.addArticle(existing);
-        return ResponseEntity.ok(convertToDTO(updated));
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteArticle(@PathVariable Long id) {
         boolean deleted = articleService.deleteArticleById(id);
-        if (!deleted) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found!");
-        }
+        if (!deleted) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Article not found!");
         return ResponseEntity.ok("Article deleted successfully!");
     }
 }
+

@@ -38,7 +38,7 @@
           <td>{{ article.category }}</td>
           <td>
             <router-link
-              :to="`/edit-article/${article.id}`"
+              :to="'/edit-article/' + article.id"
               class="btn btn-warning me-2"
               >Edit</router-link
             >
@@ -135,6 +135,7 @@ onMounted(fetchArticles);
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
 h2 {
   text-align: left;
   margin-top: 10px;

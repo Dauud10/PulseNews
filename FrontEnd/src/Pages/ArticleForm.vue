@@ -4,8 +4,8 @@
 
     <form @submit.prevent="saveArticle">
       <!-- Title -->
-      <div class="mb-3">
-        <label class="form-label">Title:</label>
+      <div class="form-group">
+        <label>Title:</label>
         <input
           type="text"
           v-model="article.title"
@@ -16,8 +16,8 @@
       </div>
 
       <!-- Content -->
-      <div class="mb-3">
-        <label class="form-label">Content:</label>
+      <div class="form-group">
+        <label>Content:</label>
         <textarea
           v-model="article.content"
           placeholder="Article Content"
@@ -27,8 +27,8 @@
       </div>
 
       <!-- Author -->
-      <div class="mb-3">
-        <label class="form-label">Author:</label>
+      <div class="form-group">
+        <label>Author:</label>
         <input
           type="text"
           v-model="article.author"
@@ -39,8 +39,8 @@
       </div>
 
       <!-- Published At -->
-      <div class="mb-3">
-        <label class="form-label">Published At:</label>
+      <div class="form-group">
+        <label>Published At:</label>
         <input
           type="date"
           v-model="article.publishedAt"
@@ -50,15 +50,17 @@
       </div>
 
       <!-- Category -->
-      <div class="mb-3">
-        <label class="form-label">Category:</label>
-        <input
-          type="text"
-          v-model="article.category"
-          placeholder="Article Category"
-          class="form-control"
-          required
-        />
+      <div class="form-group">
+        <label>Category:</label>
+        <select v-model="article.category" class="form-control" required>
+          <option
+            v-for="category in categories"
+            :key="category.id"
+            :value="category.id"
+          >
+            {{ category.name }}
+          </option>
+        </select>
       </div>
 
       <button type="submit" class="btn btn-primary">
@@ -67,56 +69,82 @@
     </form>
 
     <hr />
-
     <router-link to="/article-list" class="btn btn-secondary"
       >Back to Article List</router-link
     >
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
+<script>
 import axios from "axios";
 
-const route = useRoute();
-const router = useRouter();
+export default {
+  name: "ArticleForm",
+  data() {
+    return {
+      article: {
+        title: "",
+        content: "",
+        author: "",
+        publishedAt: "",
+        category: "",
+      },
+      categories: [],
+      isEditing: false,
+    };
+  },
+  mounted() {
+    this.fetchCategories();
+    if (this.$route.params.id) {
+      this.isEditing = true;
+      this.fetchArticle();
+    }
+  },
+  methods: {
+    fetchCategories() {
+      axios
+        .get("http://localhost:8080/categories")
+        .then((response) => {
+          this.categories = response.data;
+        })
+        .catch((error) => console.error("Error fetching categories:", error));
+    },
+    fetchArticle() {
+      axios
+        .get(`http://localhost:8080/articles/${this.$route.params.id}`)
+        .then((response) => {
+          this.article = response.data;
+        })
+        .catch((error) => console.error("Error fetching article:", error));
+    },
+    saveArticle() {
+      const url = this.isEditing
+        ? `http://localhost:8080/articles/${this.$route.params.id}`
+        : "http://localhost:8080/articles";
 
-const article = ref({
-  title: "",
-  content: "",
-  author: "",
-  publishedAt: "",
-  category: "",
-});
+      const method = this.isEditing ? "put" : "post";
 
-const isEditing = ref(false);
-
-const saveArticle = () => {
-  if (isEditing.value) {
-    axios
-      .put(`http://localhost:8080/articles/${route.params.id}`, article.value)
-      .then(() => router.push("/articlelist"))
-      .catch((error) => console.error("Error updating article:", error));
-  } else {
-    axios
-      .post("http://localhost:8080/articles", article.value)
-      .then(() => router.push("/articlelist"))
-      .catch((error) => console.error("Error adding article:", error));
-  }
+      axios[method](url, this.article)
+        .then(() => {
+          this.$router.push("/article-list");
+        })
+        .catch((error) => console.error("Error saving article:", error));
+    },
+  },
 };
-
-const fetchArticle = () => {
-  if (route.params.id) {
-    isEditing.value = true;
-    axios
-      .get(`http://localhost:8080/articles/${route.params.id}`)
-      .then((response) => {
-        article.value = response.data;
-      })
-      .catch((error) => console.error("Error fetching article:", error));
-  }
-};
-
-onMounted(fetchArticle);
 </script>
+
+<style scoped>
+.container {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #ff4242;
+  color: white;
+}
+</style>

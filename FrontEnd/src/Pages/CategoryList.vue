@@ -1,61 +1,6 @@
-<script>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import { Modal } from "bootstrap";
-
-export default {
-  name: "ListCategory",
-  setup() {
-    const category = ref([]);
-    const successMessage = ref("");
-    const selectedCategory = ref({});
-    let deleteModalInstance = ref(null);
-
-    const fetchCategory = () => {
-      axios
-        .get("http://localhost:8080/categories")
-        .then((response) => {
-          category.value = response.data;
-        })
-        .catch((error) => console.error("Error fetching category:", error));
-    };
-
-    const showDeleteModal = (category) => {
-      selectedCategory.value = category;
-      deleteModalInstance.value = new Modal(
-        document.getElementById("deleteModal")
-      );
-      deleteModalInstance.value.show();
-    };
-
-    const deleteCategory = () => {
-      axios
-        .delete(`http://localhost:8080/categories/${selectedCategory.value.id}`)
-        .then(() => {
-          successMessage.value = "Category deleted successfully!";
-          fetchCategory();
-          deleteModalInstance.value.hide();
-        })
-        .catch((error) => console.error("Error deleting category:", error));
-    };
-
-    onMounted(fetchCategory);
-
-    return {
-      category,
-      successMessage,
-      selectedCategory,
-      showDeleteModal,
-      deleteCategory,
-    };
-  },
-};
-</script>
-
 <template>
   <div class="container">
     <h2>Category List</h2>
-    <!-- Add Employee Button -->
     <router-link to="/add-category" class="btn btn-success mb-3"
       >Add Category</router-link
     >
@@ -63,7 +8,6 @@ export default {
       >Back to Admin Dashboard</router-link
     >
 
-    <!-- Success Alert -->
     <div
       v-if="successMessage"
       class="alert alert-success alert-dismissible fade show"
@@ -81,20 +25,15 @@ export default {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="category in category" :key="category.id">
+        <tr v-for="category in categoryList" :key="category.id">
           <td>{{ category.name }}</td>
-
           <td>
             <router-link
-              :to="`/edit-category/${category.id}`"
+              :to="'/edit-category/' + category.id"
               class="btn btn-warning"
               >Edit</router-link
             >
-            <button
-              type="button"
-              class="btn btn-danger"
-              @click="showDeleteModal(category)"
-            >
+            <button class="btn btn-danger" @click="showDeleteModal(category)">
               Delete
             </button>
           </td>
@@ -102,34 +41,30 @@ export default {
       </tbody>
     </table>
 
-    <div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Confirm Delete</h5>
-            <button type="button" class="close" data-dismiss="modal">
-              &times;
-            </button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <p>
               Are you sure you want to delete
-              <strong>{{ selectedCategory.name }} </strong>?
+              <strong>{{ selectedCategory.name }}</strong
+              >?
             </p>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-danger"
-              @click="deleteCategory"
-            >
+            <button class="btn btn-danger" @click="deleteCategory">
               Yes, Delete
             </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
+            <button class="btn btn-secondary" data-bs-dismiss="modal">
               Cancel
             </button>
           </div>
@@ -139,6 +74,45 @@ export default {
   </div>
 </template>
 
+<script setup>
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { Modal } from "bootstrap";
+
+const categoryList = ref([]);
+const successMessage = ref("");
+const selectedCategory = ref({});
+let deleteModalInstance = null;
+
+const fetchCategories = () => {
+  axios
+    .get("http://localhost:8080/categories")
+    .then((response) => {
+      categoryList.value = response.data;
+    })
+    .catch((error) => console.error("Error fetching categories:", error));
+};
+
+const showDeleteModal = (category) => {
+  selectedCategory.value = category;
+  deleteModalInstance = new Modal(document.getElementById("deleteModal"));
+  deleteModalInstance.show();
+};
+
+const deleteCategory = () => {
+  axios
+    .delete(`http://localhost:8080/categories/${selectedCategory.value.id}`)
+    .then(() => {
+      successMessage.value = "Category deleted successfully!";
+      fetchCategories();
+      deleteModalInstance.hide();
+    })
+    .catch((error) => console.error("Error deleting category:", error));
+};
+
+onMounted(fetchCategories);
+</script>
+
 <style scoped>
 h2 {
   text-align: left;
@@ -146,6 +120,7 @@ h2 {
   font-size: 33px;
   color: white;
 }
+
 .btn {
   margin: 20px;
   background-color: #ff4242; /* Red background for consistency */

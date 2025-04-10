@@ -1,6 +1,6 @@
 package com.example.backend.Controller;
 
-import com.example.backend.Controller.CategoryDTO;
+import DTO.CategoryDTO;
 import com.example.backend.Model.Category;
 import com.example.backend.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +22,12 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    // Convert Category to CategoryDTO
     private CategoryDTO convertToDTO(Category category) {
         CategoryDTO dto = new CategoryDTO();
         dto.setName(category.getName());
         return dto;
     }
 
-    // Convert CategoryDTO to Category
     private Category convertToEntity(CategoryDTO dto) {
         Category category = new Category();
         category.setName(dto.getName());
