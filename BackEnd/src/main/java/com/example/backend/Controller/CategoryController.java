@@ -1,6 +1,6 @@
 package com.example.backend.Controller;
 
-import com.example.backend.DTO.CategoryDTO;
+import com.example.backend.DTO.CategoryDTO;  // Correct import
 import com.example.backend.Model.Category;
 import com.example.backend.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:5173") // Allow Vue frontend
+@CrossOrigin(origins = "http://localhost:8084")
 @RestController
 @RequestMapping("/categories")
 @Validated
@@ -21,6 +21,17 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+
+
+    private CategoryDTO convertToDTO(Category category) {
+        CategoryDTO dto = new CategoryDTO();
+        dto.setName(category.getName());
+        return dto;
+    }
+
+    private Category convertToEntity(CategoryDTO dto) {
+        Category category = new Category();
+        category.setName(dto.getName());
 
     // Convert Category to CategoryDTO
     private CategoryDTO convertToDTO(Category category) {
@@ -31,16 +42,24 @@ public class CategoryController {
     private Category convertToEntity(CategoryDTO categoryDTO) {
         Category category = new Category();
         category.setName(categoryDTO.getName());
+
         return category;
     }
 
     @GetMapping
     public ResponseEntity<List<CategoryDTO>> getAllCategories() {
         List<Category> categories = categoryService.getAllCategories();
+
+        List<CategoryDTO> dtoList = categories.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(dtoList);
+
         List<CategoryDTO> categoryDTOs = categories.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(categoryDTOs);
+
     }
 
     @GetMapping("/{id}")
@@ -49,6 +68,15 @@ public class CategoryController {
         if (category == null) {
             return ResponseEntity.notFound().build();
         }
+
+        return ResponseEntity.ok(convertToDTO(category));
+    }
+
+    @PostMapping
+    public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO dto) {
+        Category saved = categoryService.addCategory(convertToEntity(dto));
+        return new ResponseEntity<>(convertToDTO(saved), HttpStatus.CREATED);
+
         CategoryDTO categoryDTO = convertToDTO(category);
         return ResponseEntity.ok(categoryDTO);
     }
@@ -59,25 +87,32 @@ public class CategoryController {
         Category savedCategory = categoryService.addCategory(category);
         CategoryDTO savedCategoryDTO = convertToDTO(savedCategory);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCategoryDTO);
+
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryDTO> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryDTO categoryDTO) {
-        Category existingCategory = categoryService.getCategoryById(id);
-        if (existingCategory == null) {
+    public ResponseEntity<CategoryDTO> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryDTO dto) {
+        Category existing = categoryService.getCategoryById(id);
+        if (existing == null) {
             return ResponseEntity.notFound().build();
         }
+
+        existing.setName(dto.getName());
+        Category updated = categoryService.addCategory(existing);
+        return ResponseEntity.ok(convertToDTO(updated));
+
         categoryDTO.setId(id); // Ensure correct ID
         Category category = convertToEntity(categoryDTO);
         Category savedCategory = categoryService.addCategory(category);
         CategoryDTO savedCategoryDTO = convertToDTO(savedCategory);
         return ResponseEntity.ok(savedCategoryDTO);
+
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long id) {
-        boolean isDeleted = categoryService.deleteCategoryById(id);
-        if (!isDeleted) {
+        boolean deleted = categoryService.deleteCategoryById(id);
+        if (!deleted) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category not found!");
         }
         return ResponseEntity.ok("Category deleted successfully!");

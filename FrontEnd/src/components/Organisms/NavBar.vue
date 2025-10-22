@@ -8,37 +8,38 @@
       <router-link to="/" class="nav-link" exact-active-class="active"
         >HOME</router-link
       >
-      <router-link to="/" class="nav-link" exact-active-class="active"
-        >ARTICLE DETAIL</router-link
-      >
-      <router-link to="/categories" class="nav-link" exact-active-class="active"
-        >CATEGORIES</router-link
-      >
       <router-link
-        to="/contactpage"
+        to="/articlecategories"
         class="nav-link"
         exact-active-class="active"
-        >CONTACT</router-link
+        >CATEGORIES</router-link
+      >
+      <router-link to="/aboutus" class="nav-link" exact-active-class="active"
+        >ABOUT US</router-link
+      >
+      <router-link to="/contact-us" class="nav-link" exact-active-class="active"
+        >CONTACT US</router-link
       >
     </nav>
 
-    <!-- Search Bar and User Actions -->
+    <!-- Search Bar and Log In -->
     <div class="actions">
-      <div class="search-container">
-        <input
-          type="text"
-          v-model="searchQuery"
-          placeholder="Search"
-          class="search-bar"
-          @keypress.enter="performSearch"
-        />
-      </div>
-      <router-link to="/registerpage" class="user-icon">
-        <user-icon />
-      </router-link>
+      <input
+        type="text"
+        v-model="searchQuery"
+        placeholder="Search"
+        class="search-bar"
+        @keypress.enter="performSearch"
+      />
+      <router-link
+        to="/login"
+        class="nav-link login-link"
+        exact-active-class="active"
+        >LOG IN</router-link
+      >
     </div>
 
-    <!-- Mobile Menu Toggle -->
+    <!-- Mobile Toggle -->
     <button class="menu-toggle" @click="toggleMobileMenu">
       <i class="fas fa-bars"></i>
     </button>
@@ -48,20 +49,23 @@
       <router-link to="/" class="nav-link" @click="toggleMobileMenu"
         >HOME</router-link
       >
-      <router-link to="/about" class="nav-link" @click="toggleMobileMenu"
-        >ABOUT</router-link
+      <router-link
+        to="/article-detail"
+        class="nav-link"
+        @click="toggleMobileMenu"
+        >ARTICLE DETAIL</router-link
       >
       <router-link
-        to="/usercategories"
+        to="/articlecategories"
         class="nav-link"
         @click="toggleMobileMenu"
         >CATEGORIES</router-link
       >
-      <router-link to="/contact" class="nav-link" @click="toggleMobileMenu"
+      <router-link to="/contact-us" class="nav-link" @click="toggleMobileMenu"
         >CONTACT</router-link
       >
       <router-link to="/login" class="nav-link" @click="toggleMobileMenu"
-        >LOGIN</router-link
+        >LOG IN</router-link
       >
     </div>
   </header>
@@ -77,13 +81,13 @@ export default {
   data() {
     return {
       isMobileMenuOpen: false,
+      searchQuery: "",
     };
   },
   setup() {
     useRouter();
     const performSearch = () => {
-      if (this.searchQuery.trim() !== "") {
-      }
+      // Add search logic if needed
     };
 
     return { performSearch };
@@ -97,145 +101,90 @@ export default {
 </script>
 
 <style scoped>
-/* Header Styling */
 .pulse-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: black;
-  padding: 15px 20px;
+  background-color: #222;
   color: white;
-  position: relative;
-  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
+  border-bottom: 2px solid #ff4242;
 }
 
-/* Navigation Links */
 .nav-links {
   display: flex;
-  gap: 30px;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .nav-link {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  font-size: 16px;
-  transition: 0.3s;
+  font-size: 1rem;
+  transition: color 0.3s ease;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: #2fa169;
-}
-
-/* Actions (Search + User) */
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Search Bar */
-.search-container {
-  display: flex;
-  align-items: center;
-}
-
-.search-bar {
-  padding: 8px 15px;
-  border-radius: 5px;
-  border: none;
-  font-size: 14px;
-  width: 200px;
-}
-
-.search-btn {
-  background: green;
-  border: none;
-  padding: 8px 10px;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.user-icon {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+  color: #ff4242;
 }
 
 .login-link {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
   font-weight: bold;
 }
 
-/* Mobile Menu */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.search-bar {
+  background-color: #333;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 0.5rem 0.75rem;
+  transition: border-color 0.3s ease;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #ff4242;
+}
+
 .menu-toggle {
   display: none;
   background: none;
   border: none;
   color: white;
-  font-size: 24px;
+  font-size: 1.5rem;
   cursor: pointer;
 }
 
 .mobile-menu {
-  display: none;
-  position: absolute;
-  top: 60px;
-  right: 0;
-  background: black;
   width: 100%;
-  text-align: center;
+  background-color: #111;
+  display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding: 20px;
+  align-items: center;
+  padding: 1.5rem 0;
+  gap: 1rem;
+  border-top: 1px solid #333;
 }
 
-.mobile-menu .nav-link {
-  display: block;
-  padding: 10px;
-}
-
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
-  .nav-links {
+  .nav-links,
+  .actions {
     display: none;
   }
 
   .menu-toggle {
     display: block;
   }
-
-  .mobile-menu {
-    display: flex;
-  }
-}
-</style>
-
-<style scoped>
-nav {
-  background-color: #333;
-  padding: 10px 0;
-}
-
-ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-}
-
-li {
-  margin: 0 15px;
-}
-
-a {
-  color: white;
-  text-decoration: none;
 }
 </style>

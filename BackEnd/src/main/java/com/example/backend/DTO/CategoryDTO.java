@@ -1,4 +1,4 @@
-package com.example.backend.Controller;
+package com.example.backend.DTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -18,4 +18,3 @@ public class CategoryDTO {
         this.name = name;
     }
 }
-

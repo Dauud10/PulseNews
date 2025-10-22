@@ -4,7 +4,7 @@
     <router-link to="/add-article" class="btn btn-success mb-3"
       >Add Article</router-link
     >
-    <router-link to="pages/AdminDashboard" class="btn btn-success mb-3"
+    <router-link to="/admin-dashboard" class="btn btn-success mb-3"
       >Back to Admin Dashboard</router-link
     >
 
@@ -38,7 +38,7 @@
           <td>{{ article.category }}</td>
           <td>
             <router-link
-              :to="`/edit-article/${article.id}`"
+              :to="'/edit-article/' + article.id"
               class="btn btn-warning me-2"
               >Edit</router-link
             >
@@ -96,7 +96,7 @@ let deleteModalInstance = null;
 
 const fetchArticles = () => {
   axios
-    .get("http://localhost:8080/articles")
+    .get("http://localhost:8083/articles")
     .then((response) => {
       articleList.value = response.data;
     })
@@ -111,7 +111,7 @@ const showDeleteModal = (article) => {
 
 const deleteArticle = () => {
   axios
-    .delete(`http://localhost:8080/articles/${selectedArticle.value.id}`)
+    .delete(`http://localhost:8083/articles/${selectedArticle.value.id}`)
     .then(() => {
       successMessage.value = "Article deleted successfully!";
       fetchArticles();
@@ -126,5 +126,29 @@ onMounted(fetchArticles);
 <style scoped>
 .btn {
   margin: 20px;
+  background-color: #ff4242; /* Red background for consistency */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+h2 {
+  text-align: left;
+  margin-top: 10px;
+  font-size: 33px;
+  color: white;
+}
+
+.btn:hover {
+  background-color: #d93636; /* Darker red on hover */
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 66, 66, 0.5); /* Subtle outline on focus */
 }
 </style>

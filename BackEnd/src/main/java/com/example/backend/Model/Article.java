@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Article implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -40,5 +40,4 @@ public class Article implements Serializable {
     public Category getCategory() { return category; }
     public void setCategory(Category category) { this.category = category; }
 }
-
 

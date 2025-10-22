@@ -2,6 +2,7 @@ package com.example.backend.Service;
 
 import com.example.backend.Model.Article;
 import com.example.backend.Repository.ArticleRepository;
+import com.example.backend.Service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

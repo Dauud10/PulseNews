@@ -1,10 +1,10 @@
 <template>
   <div class="login-page">
     <div class="login-container">
-      <img src="@/assets/pulsenews.png" alt="PulseNews Logo" class="logo" />
-      <h1>LOG IN TO PULSE NEWS</h1>
-      <form @submit.prevent="handleLogin">
-        <label for="email">Enter your email:</label>
+      <img src="@/icons/pulsenews.png" alt="PulseNews Logo" class="logo" />
+      <h1>ADMIN LOGIN - PULSE NEWS</h1>
+      <form @submit.prevent="handleAdminLogin">
+        <label for="email">Enter your admin email:</label>
         <input
           id="email"
           v-model="email"
@@ -13,7 +13,7 @@
           required
         />
 
-        <label for="password">Enter your password:</label>
+        <label for="password">Enter your admin password:</label>
         <input
           id="password"
           v-model="password"
@@ -22,25 +22,15 @@
           required
         />
 
-        <button type="submit" class="login-button">LOG IN</button>
+        <button type="submit" class="login-button">ADMIN LOGIN</button>
       </form>
-      <p>
-        Don't have an account?
-        <router-link to="/register" class="register-button"
-          >Register</router-link
-        >
-        >
-      </p>
-      <p>
-        <router-link to="/forgot-password">Forgot password?</router-link>
-      </p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "LoginPage",
+  name: "AdminLogin",
   data() {
     return {
       email: "",
@@ -48,11 +38,10 @@ export default {
     };
   },
   methods: {
-    handleLogin() {
-      // Example of login logic (to replace with API call)
+    handleAdminLogin() {
       if (this.email && this.password) {
-        console.log("Logging in with:", this.email, this.password);
-        this.$router.push("/dashboard");
+        console.log("Admin logging in:", this.email);
+        this.$router.push("/admin-dashboard"); // Correct path to AdminDashboard
       } else {
         alert("Please fill out all fields.");
       }
@@ -86,7 +75,7 @@ export default {
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 22px;
   margin-bottom: 20px;
   color: #ff4242;
 }
@@ -133,25 +122,5 @@ input:focus {
 
 .login-button:hover {
   background: #d93636;
-}
-
-router-link {
-  color: #ff4242;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-router-link:hover {
-  text-decoration: underline;
-}
-.register-button {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background: #ff4242;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 </style>

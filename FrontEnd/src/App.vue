@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import NavBar from "./components/Organisms/NavBar.vue"; // Make sure the path is correct
-import Footer from "./components/Organisms/SiteFooter.vue";
+import NavBar from "./components/Organisms/NavBar.vue";
+import Footer from "./components/Organisms/Article-Footer.vue";
 
 export default {
   name: "App",
@@ -26,7 +26,7 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: linear-gradient(90deg, #0097b2 0%, #349610 73%);
+  background-color: #222; /* Dark Gray to match your color scheme */
 }
 
 body {

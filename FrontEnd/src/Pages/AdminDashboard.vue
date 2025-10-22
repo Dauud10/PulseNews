@@ -7,12 +7,12 @@
     <div class="container">
       <h2>Welcome!</h2>
       <p>Select an option from the navigation below.</p>
-      <router-link to="/CategoryList"
-        ><a class="btn">View Category List</a></router-link
-      >
-      <router-link to="/ArticleList"
-        ><a class="btn">View Article List</a></router-link
-      >
+      <router-link to="/category-list">
+        <a class="btn">View Category List</a>
+      </router-link>
+      <router-link to="/article-list">
+        <a class="btn">View Article List</a>
+      </router-link>
     </div>
   </main>
 </template>
@@ -24,17 +24,17 @@ html {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #064e3b; /* Dark Green */
-  color: black; /* White text for contrast */
+  background-color: #141414; /* Dark background for consistency */
+  color: white; /* White text for contrast */
 }
 header {
-  background-color: #033d29; /* Darker green for header */
+  background: linear-gradient(90deg, #000000 0%, #1a1a1a 100%);
   color: white;
   padding: 1rem 2rem;
   text-align: center;
 }
 nav {
-  background-color: #046c4e; /* Slightly lighter green */
+  background-color: #ff2a2a; /* Slightly darker red */
   color: white;
   padding: 1rem;
   display: flex;
@@ -55,10 +55,10 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #cccccc;
+  background-color: #222222; /* Dark background for main area */
 }
 footer {
-  background-color: #033d29;
+  background: linear-gradient(90deg, #000000 0%, #1a1a1a 100%);
   color: white;
   text-align: center;
   padding: 1rem;
@@ -69,18 +69,18 @@ footer {
   margin: 0 auto;
   text-align: center;
 }
-/* Make Welcome message white */
 .container h2,
 .container p {
-  color: black; /* Ensures text remains white */
+  color: white; /* Ensures text remains readable */
 }
+
 /* Button Styles */
 .btn {
   display: inline-block;
   margin: 20px;
   padding: 0.8rem 1.5rem;
   color: white;
-  background-color: #198754; /* Red */
+  background-color: #ff4242; /* Button matching main red color */
   border: none;
   border-radius: 4px;
   text-decoration: none;
@@ -88,7 +88,8 @@ footer {
   transition: background 0.3s ease-in-out;
 }
 .btn:hover {
-  background-color: #1976d2; /* Blue on hover */
+  background-color: #d93636; /* Slightly darker red for hover */
 }
 </style>
+
 <script setup lang="ts"></script>

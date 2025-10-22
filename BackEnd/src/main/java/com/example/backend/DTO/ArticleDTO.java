@@ -1,8 +1,7 @@
-package com.example.backend.Controller;
+package com.example.backend.DTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 public class ArticleDTO {
 
@@ -15,10 +14,7 @@ public class ArticleDTO {
     @NotBlank(message = "Author cannot be blank")
     private String author;
 
-    @NotNull(message = "Published date cannot be null")
-    private LocalDate publishedAt;
-
-    @NotNull(message = "Category ID cannot be null")
+    @NotNull(message = "Category ID is required")
     private Long categoryId;
 
     // Getters & Setters
@@ -46,14 +42,6 @@ public class ArticleDTO {
         this.author = author;
     }
 
-    public LocalDate getPublishedAt() {
-        return publishedAt;
-    }
-
-    public void setPublishedAt(LocalDate publishedAt) {
-        this.publishedAt = publishedAt;
-    }
-
     public Long getCategoryId() {
         return categoryId;
     }
@@ -62,4 +50,3 @@ public class ArticleDTO {
         this.categoryId = categoryId;
     }
 }
-
