@@ -22,6 +22,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+
     private CategoryDTO convertToDTO(Category category) {
         CategoryDTO dto = new CategoryDTO();
         dto.setName(category.getName());
@@ -31,16 +32,34 @@ public class CategoryController {
     private Category convertToEntity(CategoryDTO dto) {
         Category category = new Category();
         category.setName(dto.getName());
+
+    // Convert Category to CategoryDTO
+    private CategoryDTO convertToDTO(Category category) {
+        return new CategoryDTO(category.getId(), category.getName());
+    }
+
+    // Convert CategoryDTO to Category
+    private Category convertToEntity(CategoryDTO categoryDTO) {
+        Category category = new Category();
+        category.setName(categoryDTO.getName());
+
         return category;
     }
 
     @GetMapping
     public ResponseEntity<List<CategoryDTO>> getAllCategories() {
         List<Category> categories = categoryService.getAllCategories();
+
         List<CategoryDTO> dtoList = categories.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(dtoList);
+
+        List<CategoryDTO> categoryDTOs = categories.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(categoryDTOs);
+
     }
 
     @GetMapping("/{id}")
@@ -49,6 +68,7 @@ public class CategoryController {
         if (category == null) {
             return ResponseEntity.notFound().build();
         }
+
         return ResponseEntity.ok(convertToDTO(category));
     }
 
@@ -56,6 +76,18 @@ public class CategoryController {
     public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO dto) {
         Category saved = categoryService.addCategory(convertToEntity(dto));
         return new ResponseEntity<>(convertToDTO(saved), HttpStatus.CREATED);
+
+        CategoryDTO categoryDTO = convertToDTO(category);
+        return ResponseEntity.ok(categoryDTO);
+    }
+
+    @PostMapping
+    public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
+        Category category = convertToEntity(categoryDTO);
+        Category savedCategory = categoryService.addCategory(category);
+        CategoryDTO savedCategoryDTO = convertToDTO(savedCategory);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedCategoryDTO);
+
     }
 
     @PutMapping("/{id}")
@@ -64,9 +96,17 @@ public class CategoryController {
         if (existing == null) {
             return ResponseEntity.notFound().build();
         }
+
         existing.setName(dto.getName());
         Category updated = categoryService.addCategory(existing);
         return ResponseEntity.ok(convertToDTO(updated));
+
+        categoryDTO.setId(id); // Ensure correct ID
+        Category category = convertToEntity(categoryDTO);
+        Category savedCategory = categoryService.addCategory(category);
+        CategoryDTO savedCategoryDTO = convertToDTO(savedCategory);
+        return ResponseEntity.ok(savedCategoryDTO);
+
     }
 
     @DeleteMapping("/{id}")
@@ -78,4 +118,5 @@ public class CategoryController {
         return ResponseEntity.ok("Category deleted successfully!");
     }
 }
+
 
