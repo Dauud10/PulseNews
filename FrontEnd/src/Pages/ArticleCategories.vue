@@ -44,7 +44,7 @@ export default {
   methods: {
     fetchCategories() {
       axios
-        .get("http://localhost:8080/categories") // Adjust URL as needed
+        .get("http://localhost:8083/categories") // Adjust URL as needed
         .then((response) => {
           this.categories = response.data;
         })

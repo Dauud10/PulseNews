@@ -13,7 +13,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:8084")
 @RestController
 @RequestMapping("/categories")
 @Validated
